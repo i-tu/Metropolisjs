@@ -1,4 +1,3 @@
-
 class Place
 {
   String name;
@@ -70,7 +69,6 @@ class Place
   void calculate_location() {
     x_ref = x - places[origo].getX();
     y_ref = y - places[origo].getY();
-    
     if(x_ref==0 && y_ref==0) { //olen origo
       x_ref = width/2;
       y_ref = height/2;
@@ -116,22 +114,22 @@ class Place
   
   float stopCoordsX(String ID)
   {
-    return zoomX(x_actual) + cos(railTrackDirection(n, ID))*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 10;
+    return zoomX(x_actual) + cos(trackDirection(n, ID))*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 10;
   }
   
   float stopCoordsY(String ID)
   {
-    return zoomY(y_actual) + sin(railTrackDirection(n, ID))*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 10;
+    return zoomY(y_actual) + sin(trackDirection(n, ID))*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 10;
   }
   
   float tramStopCoordsX(String ID)
   {
-    return zoomX(x_actual) + cos(tramTrackDirection(n, ID))*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 8;
+    return zoomX(x_actual) + cos(trackDirection(n, ID))*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 8;
   }
   
   float tramStopCoordsY(String ID)
   {
-    return zoomY(y_actual) + sin(tramTrackDirection(n, ID))*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 8;
+    return zoomY(y_actual) + sin(trackDirection(n, ID))*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 8;
   }
   
   void consolidate(){
@@ -152,56 +150,26 @@ class Place
     float dir = 0;
       
     for(int i = 0;i<tracks.size();i++)
-      dir += tramTrackDirection(n, (String)tracks.get(i));  
+      dir += trackDirection(n, (String)tracks.get(i));
     dir = dir/tracks.size();
       
     pushMatrix();
       translate(zoomX(x_actual), zoomY(y_actual));
       rotate(dir);
-      drawStop(0,0, 2 + (tracks.size()-1)*8, n<=68 ? 8 : 5, dir);  
+      drawStop(0,0, 2 + (tracks.size()-1)*8, n<=68 ? 8 : 5);
     popMatrix();
     
-    if(this.inside()){
-      drawScale( mode == 1 ? timeToOrigo() * 3600 : distToOrigo() * 1000);
-	}
-    if(zoomAmount > 4 || n <= 68) {
-      pushMatrix();
-
-    fill(0);
-
-    if(n != origo) {
-      translate(zoomX(x_actual), zoomY(y_actual));
-
-      if(PI/2 < angle_ref || angle_ref < -PI/2) {
-        textAlign(LEFT, CENTER);
-        text(name, 20, 0);
-      }
-      else {
-        textAlign(RIGHT, CENTER);
-        text(name, -20, 0);
-      }
-    }     
-    else {
-      textAlign(CENTER, BOTTOM); 
-      text(name, 0, 30);
-    }
-
-    textAlign(RIGHT, CENTER);
-    popMatrix();
-    }
   }
 
-  float railTrackDirection(int placeID, String trackID) {
+  float trackDirection(int placeID, String trackID) {
     for(int i = 0; i < railTracks.length; i++)
       if(railTracks[i].label.equals(trackID))
         return railTracks[i].trackDirection(placeID);
-    return 0;
-  }
 
-  float tramTrackDirection(int placeID, String trackID) {
     for(int i = 0; i < tramTracks.length; i++)
       if(tramTracks[i].label.equals(trackID))
         return tramTracks[i].trackDirection(placeID);
+
     return 0;
   }
 

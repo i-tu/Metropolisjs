@@ -50,7 +50,7 @@ void draw()
       text("Helsinki metropolitan area travel times", 175, height-55);
 
 }
-
+/*
 void drawScale(float d) {
   textAlign(CENTER, CENTER);
   
@@ -76,16 +76,16 @@ void drawScale(float d) {
     stroke(0);
     fill(transparent);
     ellipse(width/2, height/2, scaled, scaled);
-    stroke(bg);
-    fill(bg);
+    stroke(bg1);
+    fill(bg2);
     rect(width/2, height/2 - scaled/2, 50, 10);
     fill(0);
     text(str(round(d/60)) + " min", width/2, height/2 - scaled/2);
   }
 }
+*/
 
-
-void drawStop(float x, float y, float w, float h, float angle) {
+void drawStop(float x, float y, float w, float h) {
   fill(255);
   x -= w/2;
   y -= h/2;

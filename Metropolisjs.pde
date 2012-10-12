@@ -9,20 +9,20 @@ Button minusButton;
 
 float zoomAmount = 1;
 
-int origo;
+int origo = 1;
 boolean origo_more;
 
 float TIME_CONSTANT = 0.5;
 float fr          = 24;
 
-color bg1         = color(241, 239, 221);
+color bg1         = color(125, 125, 125);
 color bg2         = color(223, 221, 217);
 color transparent = color(255, 255, 255, 0);
 color banner      = color(165, 191, 221);
 color yellow      = color(255, 204, 0);
 
 int movedFrames   = -1;
-int mode;
+int mode = 0;
 
 PFont labelFont;
 PFont titleFont;
@@ -32,36 +32,30 @@ PShape timeShape;
 PShape plusShape;
 PShape minusShape;
 
-void setup()
-{
-  background(255,0,0);
-  size(1000, 800);
+void setup() {
 
-  // Load text data
+  size(1000, 800);
+  
   String[] railStops = loadStrings("data/stops_rail.txt");
   String[] tramStops = loadStrings("data/stops_tram.txt");
-  
   String[] railTrackData = loadStrings("data/lines_rail.txt");
   String[] tramTrackData = loadStrings("data/lines_tram.txt");
   String[] distMatrix = loadStrings("data/distance_matrix.txt");
+
   int n_places = distMatrix.length;
 
-  // Load Place data
   places = new Place[railStops.length + tramStops.length];
 
-  // - Rails
   for (int i = 0; i < railStops.length; i++) {
     String[] pieces = split(railStops[i], ' ');
     places[i] = new Place(pieces[0], int(pieces[1]), int( pieces[2]), i, 0);
   }
   
-  // - Trams
   for (int i = railStops.length; i < railStops.length + tramStops.length; i++) {
     String[] pieces = split(tramStops[i - railStops.length], '\t');
     places[i] = new Place(pieces[1], int(pieces[2]), int( pieces[3]), i, int(pieces[0]));
   }
   
-  // Load distance data
   distanceMatrix = new int[n_places][n_places];
   
   for(int i = 0; i < n_places; i++) {
@@ -75,7 +69,6 @@ void setup()
     }
   }
       
-  // Load tram data
   tramTracks = new Track[tramTrackData.length];
   
   for (int i = 0; i < tramTrackData.length; i++) {
@@ -88,7 +81,6 @@ void setup()
     tramTracks[i] = new Track(pieces[0], stopNumbers, color(int(pieces[1]), int(pieces[2]), int(pieces[3])),1);
   }
   
-  // Load track data  
   railTracks = new Track[railTrackData.length];
    
   for (int i = 0; i < railTrackData.length; i++) {
@@ -105,10 +97,10 @@ void setup()
     railTracks[i] = new Track(pieces[0], stopNumbers, color(int(pieces[1]), int(pieces[2]), int(pieces[3])),0);
   }
   
-  origo = 0;  
+  
   for (int i = 0; i < places.length; i++)
     places[i].calculate_location();
-  places[0].calculate_location();
+  places[origo].calculate_location();
     
   labelFont = createFont("Helvetica", 12);
   titleFont = createFont("Helvetica", 20);
@@ -124,7 +116,6 @@ void setup()
   plusButton = new Button(width - 50, height - 50, 48, 48, plusShape, false);
   minusButton = new Button(width - 115, height - 50, 48, 48, minusShape, false);
   
-
   frameRate(fr);
   smooth();
   background(bg1);

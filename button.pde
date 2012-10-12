@@ -33,7 +33,7 @@ class Button
   
   boolean toggle() {
     if(toggled) { toggled = false; return false; }
-    else {toggled = true; return true;}
+    else { toggled = true; return true; }
   }
   
   void display() {

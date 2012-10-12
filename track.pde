@@ -59,7 +59,7 @@ class Track
     else
       stroke(0, 50);
   
-    curveTightness(0.2);
+    curveTightness(0.5);
     noFill();
 
     int i;
