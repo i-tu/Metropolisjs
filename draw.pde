@@ -17,12 +17,18 @@ void draw()
 
   colorMode(RGB, 255);
 
-  for (int i = 0; i < railTracks.length; i++)  
-    railTracks[i].display();
-    
-  for (int i = 0; i < tramTracks.length; i++)  
-    tramTracks[i].display();  
-   
+  if(trackMode == 1) {
+      
+    for (int i = 0; i < railTracks.length; i++)  
+      railTracks[i].display();
+      
+    for (int i = 0; i < tramTracks.length; i++)  
+      tramTracks[i].display();  
+     
+  }
+
+  textFont(labelFont);
+  
   for (int i = 0; i < places.length; i++)
     if(i != origo)
       places[i].display();
@@ -39,22 +45,13 @@ void draw()
     if(movedFrames > fr*TIME_CONSTANT)
       movedFrames = -1;
   }
-    
-  fill(255,255,255,0);
-  stroke(100);
-
+  
   sidebar.display();
 
   fill(0);
   
   textFont(titleFont);
   textAlign(LEFT, CENTER);
-
-  if(mode==0)
-      text("Helsinki metropolitan area geographical distances", 175, height-55);
-  else
-      text("Helsinki metropolitan area travel times", 175, height-55);
-
 }
 
 void drawScale(float d, color c) {
@@ -88,7 +85,7 @@ void drawScale(float d, color c) {
 
 
 void drawStop(float x, float y, float w, float h) {
-  fill(255,255,255,0);
+  fill(255);
   x -= w/2;
   y -= h/2;
 

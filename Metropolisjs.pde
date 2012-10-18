@@ -2,10 +2,7 @@ Place[] places;
 Track[] railTracks;
 Track[] tramTracks;
 int[][] distanceMatrix;
-Button geoButton;
-Button timeButton;
-Button plusButton;
-Button minusButton;
+
 
 Sidebar sidebar;
 
@@ -25,19 +22,16 @@ color yellow      = color(255, 204, 0);
 
 int movedFrames   = -1;
 int mode = 1;
+int trackMode = 1;
 
 PFont labelFont;
 PFont titleFont;
 PFont scaleFont;
 
-PShape geoShape;
-PShape timeShape;
-PShape plusShape;
-PShape minusShape;
 
 void setup() {
 
-  size(1200, 1000);
+  size(1000, 1000);
   
   String[] railStops = loadStrings("data/stops_rail.txt");
   String[] tramStops = loadStrings("data/stops_tram.txt");

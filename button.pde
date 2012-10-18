@@ -43,7 +43,6 @@ class Button
     else
       fill(basecolor);
 
-    rect(x, y, buttonWidth, buttonHeight);
     fill(0);
     shapeMode(CENTER);
     shape(sh, x, y, buttonWidth - 5, buttonHeight - 5);

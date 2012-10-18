@@ -69,15 +69,13 @@ class Place
   void calculate_location() {
     x_ref = x - places[origo].getX();
     y_ref = y - places[origo].getY();
-    if(x_ref==0 && y_ref==0) { //olen origo
+    if(x_ref==0 && y_ref==0) {
       x_ref = width/2;
       y_ref = height/2;
     }
     else {
-       angle_ref = atan2( (places[origo].getY()-getY()), (places[origo].getX()-getX()) );
-       
-       //angle_ref = circleBin(angle_ref,8);
-
+      angle_ref = atan2( (places[origo].getY()-getY()), (places[origo].getX()-getX()) );
+      
       float radius = sqrt(x_ref*x_ref+y_ref*y_ref);
 
       if(mode == 0) {
@@ -142,7 +140,7 @@ class Place
   {
     rectMode(CENTER);
     stroke(0);
-    fill(transparent);
+    fill(255);
 
     if (tracks.size() == 0)
       return;
@@ -155,8 +153,18 @@ class Place
       
     pushMatrix();
       translate(zoomX(x_actual), zoomY(y_actual));
-      rotate(dir);
-      drawStop(0,0, 2 + (tracks.size()-1)*8, n<=68 ? 8 : 5);
+
+      if(trackMode == 1){
+        rotate(dir);
+        drawStop(0,0, 2 + (tracks.size()-1)*8, n<=68 ? 8 : 5);
+      }
+      else {
+        ellipse(0,0,10,10);
+      }
+
+      if(this.inside())
+        text(name,0,0);
+        
     popMatrix();
     
   }
