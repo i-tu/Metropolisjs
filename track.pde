@@ -87,37 +87,35 @@ class Track
           curveVertex(places[stops[i]].stopCoordsX(label), places[stops[i]].stopCoordsY(label) );
         curveVertex(places[stops[i-1]].stopCoordsX(label), places[stops[i-1]].stopCoordsY(label) );
       endShape();
-    
-  } 
-  else if (type == 1)
-  {
-    strokeWeight(4);
+    } 
+    else if (type == 1)
+    {
+      strokeWeight(4);
 
-    beginShape();
-      curveVertex(places[stops[0]].tramStopCoordsX(label), places[stops[0]].tramStopCoordsY(label) );
-      for (i = 0; i < stops.length; i++)
-        curveVertex(places[stops[i]].tramStopCoordsX(label) , places[stops[i]].tramStopCoordsY(label) );
-      curveVertex(places[stops[i-1]].tramStopCoordsX(label) , places[stops[i-1]].tramStopCoordsY(label) );
-    endShape();
-      
-    if(origoOnLine)
-      stroke(c);
-    else 
-      stroke(c, 50);
-      
-    strokeWeight(3);
-          
-    beginShape();
-      curveVertex(places[stops[0]].tramStopCoordsX(label), places[stops[0]].tramStopCoordsY(label) );
-      for (i = 0; i < stops.length; i++)
-        curveVertex(places[stops[i]].tramStopCoordsX(label), places[stops[i]].tramStopCoordsY(label) );
-      curveVertex(places[stops[i-1]].tramStopCoordsX(label), places[stops[i-1]].tramStopCoordsY(label) );
-    endShape();
-  }
+      beginShape();
+        curveVertex(places[stops[0]].tramStopCoordsX(label), places[stops[0]].tramStopCoordsY(label) );
+        for (i = 0; i < stops.length; i++)
+          curveVertex(places[stops[i]].tramStopCoordsX(label) , places[stops[i]].tramStopCoordsY(label) );
+        curveVertex(places[stops[i-1]].tramStopCoordsX(label) , places[stops[i-1]].tramStopCoordsY(label) );
+      endShape();
+        
+      if(origoOnLine)
+        stroke(c);
+      else 
+        stroke(c, 50);
+        
+      strokeWeight(3);
+            
+      beginShape();
+        curveVertex(places[stops[0]].tramStopCoordsX(label), places[stops[0]].tramStopCoordsY(label) );
+        for (i = 0; i < stops.length; i++)
+          curveVertex(places[stops[i]].tramStopCoordsX(label), places[stops[i]].tramStopCoordsY(label) );
+        curveVertex(places[stops[i-1]].tramStopCoordsX(label), places[stops[i-1]].tramStopCoordsY(label) );
+      endShape();
+    }
   
   strokeWeight(1);
   }
-
 
   // Returns direction of track through given place
   float trackDirection(int placeID) {

@@ -1,14 +1,22 @@
 void draw()
 {
   background(bg1);
-  fill(255,255,255,0);
   
   textAlign(CENTER, CENTER);
   textFont(labelFont);
   
   fill(0);
   text(int(frameRate),20,60);
-  
+
+
+  colorMode(HSB, 100);
+
+  for(int i = 3600; i > 0; i -= 600) {
+    drawScale(i, color(60, i/60, 70));
+  }
+
+  colorMode(RGB, 255);
+
   for (int i = 0; i < railTracks.length; i++)  
     railTracks[i].display();
     
@@ -35,10 +43,8 @@ void draw()
   fill(255,255,255,0);
   stroke(100);
 
-  timeButton.display();
-  geoButton.display();
-  minusButton.display();
-  plusButton.display();
+  sidebar.display();
+
   fill(0);
   
   textFont(titleFont);
@@ -50,19 +56,16 @@ void draw()
       text("Helsinki metropolitan area travel times", 175, height-55);
 
 }
-/*
-void drawScale(float d) {
+
+void drawScale(float d, color c) {
+
   textAlign(CENTER, CENTER);
   
   if (mode == 0) { 
     float scaled = (d/10) * zoomAmount;
-    stroke(0);
-    fill(transparent);
+    fill(c);
     ellipse(width/2, height/2, scaled, scaled);
-    stroke(bg1);
-    fill(bg2);
     rect(width/2, height/2 - scaled/2, 50, 10);
-    fill(0);
 
     if(d > 2000)
       text(str(round(d/1000)) + " km", width/2, height/2 - scaled/2);
@@ -70,23 +73,22 @@ void drawScale(float d) {
       text(str(round(d)) + " m", width/2, height/2 - scaled/2);
 
    }
-   else if(mode == 1)
-   {
+
+   else if(mode == 1) {
     float scaled = d * (0.6667) * zoomAmount;
-    stroke(0);
-    fill(transparent);
+
+    stroke(c);
+    fill(c);
+    textFont(scaleFont);
+
     ellipse(width/2, height/2, scaled, scaled);
-    stroke(bg1);
-    fill(bg2);
-    rect(width/2, height/2 - scaled/2, 50, 10);
-    fill(0);
-    text(str(round(d/60)) + " min", width/2, height/2 - scaled/2);
+    text(str(round(d/60)), width/2, height/2 - scaled/2 - 15);
   }
 }
-*/
+
 
 void drawStop(float x, float y, float w, float h) {
-  fill(255);
+  fill(255,255,255,0);
   x -= w/2;
   y -= h/2;
 

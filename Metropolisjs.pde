@@ -7,6 +7,8 @@ Button timeButton;
 Button plusButton;
 Button minusButton;
 
+Sidebar sidebar;
+
 float zoomAmount = 1;
 
 int origo = 1;
@@ -22,10 +24,11 @@ color banner      = color(165, 191, 221);
 color yellow      = color(255, 204, 0);
 
 int movedFrames   = -1;
-int mode = 0;
+int mode = 1;
 
 PFont labelFont;
 PFont titleFont;
+PFont scaleFont;
 
 PShape geoShape;
 PShape timeShape;
@@ -34,7 +37,7 @@ PShape minusShape;
 
 void setup() {
 
-  size(1000, 800);
+  size(1200, 1000);
   
   String[] railStops = loadStrings("data/stops_rail.txt");
   String[] tramStops = loadStrings("data/stops_tram.txt");
@@ -104,18 +107,12 @@ void setup() {
     
   labelFont = createFont("Helvetica", 12);
   titleFont = createFont("Helvetica", 20);
+  scaleFont = createFont("Helvetica", 72);
+
   textFont(labelFont);
 
-  timeShape = loadShape("svg/time.svg");
-  geoShape = loadShape("svg/geo.svg");
-  plusShape = loadShape("svg/plus.svg");
-  minusShape = loadShape("svg/minus.svg");
-  
-  timeButton = new Button(50, height-50, 48, 48, timeShape, false);
-  geoButton = new Button(115, height-50, 48, 48, geoShape, true);
-  plusButton = new Button(width - 50, height - 50, 48, 48, plusShape, false);
-  minusButton = new Button(width - 115, height - 50, 48, 48, minusShape, false);
-  
+  sidebar = new Sidebar();
+
   frameRate(fr);
   smooth();
   background(bg1);
@@ -140,6 +137,7 @@ void switch_origo(int new_origo) {
   movedFrames = 1; // Start frame moving counter.
 }
 
+
 void mousePressed() {
   for (int i = 0; i < places.length; i++) {
     if(places[i].inside()) {
@@ -148,33 +146,6 @@ void mousePressed() {
     }
   }
 
-  if(timeButton.inside() && !timeButton.isToggled()) {
-    timeButton.toggle();
-    geoButton.toggle();
-    mode = 1;
-    switch_origo(origo); // Essentially, refresh.
-  }
-  else if(geoButton.inside() && !geoButton.isToggled())
-  {
-    timeButton.toggle();
-    geoButton.toggle();
-    mode = 0;
-    switch_origo(origo);
-  }
-  else if(plusButton.inside())
-  {
-    zoomAmount *= 1.5;
-    if(zoomAmount > 5)
-      zoomAmount = 5;
-  }
-  else if(minusButton.inside())
-  {
-    zoomAmount /= 1.5;
-    if(zoomAmount < 0.5)
-      zoomAmount = 0.5;
-  }
-
+  sidebar.mousePress();
 }
-
-
 
