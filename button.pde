@@ -37,7 +37,7 @@ class Button
   }
   
   void display() {
-    stroke(0);
+
     if(toggled)
       fill(highlightcolor);
     else

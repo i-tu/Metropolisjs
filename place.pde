@@ -139,39 +139,38 @@ class Place
   void display()
   {
     rectMode(CENTER);
-    stroke(0);
 
     if (tracks.size() == 0)
       return;
-        
+
     float dir = 0;
-      
-    for(int i = 0;i<tracks.size();i++)
+    boolean onLine = false;
+
+    for(int i = 0; i<tracks.size(); i++)
       dir += trackDirection(n, (String)tracks.get(i));
     dir = dir/tracks.size();
       
     pushMatrix();
       translate(zoomX(x_actual), zoomY(y_actual));
-
-      if(this.inside()) {
-        fill(120);
-        rect(50,0,50,10);
-        text(name,20,0);
-      }
-      else {
-        fill(255);
-      }
+      fill(0,0,100);
 
       if(trackMode == 1) {
-        rotate(dir);
-        drawStop(0,0, 2 + (tracks.size()-1)*8, n<=68 ? 8 : 5);
-      }
-      else {
-        ellipse(0,0,10,10);
+        float stopH;
+        if(n <= 68)
+          stopH = 5;
+        else
+          stopH = 5;
+ 
+        if(n != 0)
+          rotate(dir);
+
+        drawStop(0, 0, 2 + (tracks.size()-1)*9, stopH);
+        textAlign(LEFT, CENTER);
+        fill(0,0,0);
+        text(name, 5 + tracks.size()*9, 0);
       }
 
     popMatrix();
-    
   }
 
   float trackDirection(int placeID, String trackID) {

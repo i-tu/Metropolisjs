@@ -1,26 +1,18 @@
 void draw()
-{
-  background(bg1);
-  
+{  
   textAlign(CENTER, CENTER);
   textFont(labelFont);
-  
-  colorMode(HSB, 100);
 
   for(int i = 3600; i > 0; i -= 600) {
-    drawScale(i, color(60, i/60, 70));
+    drawScale(i, color(0, 0, i*10));
   }
 
-  colorMode(RGB, 255);
-
   if(trackMode == 1) {
-      
     for (int i = 0; i < railTracks.length; i++)  
       railTracks[i].display();
       
     for (int i = 0; i < tramTracks.length; i++)  
       tramTracks[i].display();  
-     
   }
 
   textFont(labelFont);
@@ -43,8 +35,6 @@ void draw()
   }
   
   sidebar.display();
-
-  fill(0);
   
   textFont(titleFont);
   textAlign(LEFT, CENTER);
@@ -55,10 +45,9 @@ void drawScale(float d, color c) {
   textAlign(CENTER, CENTER);
   
   if (mode == 0) { 
-    float scaled = (d/10) * zoomAmount;
+    float scaled = (d) * zoomAmount;
     fill(c);
     ellipse(width/2, height/2, scaled, scaled);
-    rect(width/2, height/2 - scaled/2, 50, 10);
 
     if(d > 2000)
       text(str(round(d/1000)) + " km", width/2, height/2 - scaled/2);
@@ -83,6 +72,9 @@ void drawScale(float d, color c) {
 void drawStop(float x, float y, float w, float h) {
   x -= w/2;
   y -= h/2;
+  w += 7;
+
+noStroke();
 
   beginShape();
     vertex(-w/2, -h/2);

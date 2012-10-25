@@ -24,6 +24,10 @@ class Track
     }
   }
   
+  boolean isVisible() {
+    return visible;
+  }
+
   String getLabel() {
     return label;
   }
@@ -40,8 +44,10 @@ class Track
     for (int i = 0; i < stops.length; i++) {
       if(stops[i] == places[origo].n) {
         origoOnLine = true;
+        visible = true;
         break;
       }
+      else visible = false;
     }
 
     for (int i = 0; i < stops.length;i++) {
@@ -51,15 +57,11 @@ class Track
       }
     }
 
-    if(!origoOnLine && !mouseOnLine)
+    if(!origoOnLine && !mouseOnLine) {
       return;
+    }
 
-    if(origoOnLine)
-      stroke(0);
-    else
-      stroke(0, 50);
-  
-    curveTightness(0.5);
+    curveTightness(0.85);
     noFill();
 
     int i;
@@ -67,20 +69,11 @@ class Track
     {
       strokeWeight(6);
 
-      beginShape();
-        curveVertex(places[stops[0]].stopCoordsX(label), places[stops[0]].stopCoordsY(label) );
-        for (i = 0; i < stops.length; i++)
-          curveVertex(places[stops[i]].stopCoordsX(label) , places[stops[i]].stopCoordsY(label) );
-        curveVertex(places[stops[i-1]].stopCoordsX(label) , places[stops[i-1]].stopCoordsY(label) );
-      endShape();
-      
       if(origoOnLine)
-        stroke(c);
+        stroke(c, 230);
       else
         stroke(c, 50);
         
-      strokeWeight(4);
-          
       beginShape();
         curveVertex(places[stops[0]].stopCoordsX(label), places[stops[0]].stopCoordsY(label) );
         for (i = 0; i < stops.length; i++)
@@ -90,25 +83,16 @@ class Track
     } 
     else if (type == 1)
     {
-      strokeWeight(4);
+      strokeWeight(6);
+
+      if(origoOnLine)
+        stroke(c, 230);
+      else 
+        stroke(c, 50);
 
       beginShape();
         curveVertex(places[stops[0]].tramStopCoordsX(label), places[stops[0]].tramStopCoordsY(label) );
-        for (i = 0; i < stops.length; i++)
-          curveVertex(places[stops[i]].tramStopCoordsX(label) , places[stops[i]].tramStopCoordsY(label) );
-        curveVertex(places[stops[i-1]].tramStopCoordsX(label) , places[stops[i-1]].tramStopCoordsY(label) );
-      endShape();
-        
-      if(origoOnLine)
-        stroke(c);
-      else 
-        stroke(c, 50);
-        
-      strokeWeight(3);
-            
-      beginShape();
-        curveVertex(places[stops[0]].tramStopCoordsX(label), places[stops[0]].tramStopCoordsY(label) );
-        for (i = 0; i < stops.length; i++)
+        for (i = 0; i < stops.length; i++) 
           curveVertex(places[stops[i]].tramStopCoordsX(label), places[stops[i]].tramStopCoordsY(label) );
         curveVertex(places[stops[i-1]].tramStopCoordsX(label), places[stops[i-1]].tramStopCoordsY(label) );
       endShape();

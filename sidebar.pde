@@ -28,13 +28,15 @@ class Sidebar {
 	void display() {
 
 		rectMode(CENTER);
-		textAlign(RIGHT, CENTER);
-		textFont(titleFont);
 		fill(0);
 
+		textFont(titleFont);
+		textAlign(LEFT,CENTER);
 		text(places[origo].name, width/2, height-38);
 
 		if(trackMode == 1) {
+			text(places[origo].name, 50, 50);
+			text("yhteydet", 50, 75);
 			String last = "";
 			int skipped = 0;
 			for(int i = 0; i < places[origo].tracks.size(); i++) {
@@ -44,19 +46,25 @@ class Sidebar {
 				}
 
 				fill(0,0,0,30);
-				rect(40, 50 + (i-skipped)*60, 120, 50);
 				fill((Integer) places[origo].colors.get(i));
-				ellipse(100, 50 + (i-skipped)*60, 50, 50);
-				fill(0);
-				text((String) places[origo].tracks.get(i), 50, 50 + (i-skipped)*60);
+				ellipse(100, 150 + (i-skipped)*60, 50, 50);
+				fill(0,0,100);
+				textFont(lineFont);
+				textAlign(CENTER, CENTER);
+				text((String) places[origo].tracks.get(i), 100, 142 + (i-skipped)*60);
 				last = (String) places[origo].tracks.get(i);
+				textFont(titleFont);
 			}
 		}
 
-		fill(0,0,0,30);
+
+		fill(0,0,100,200);
 		rectMode(CORNERS);
-		rect(0, height, width, height-70);
-  		
+		rect(0,height-70,width,height);
+		stroke(0,0,0);
+		line(20, height-70, width-20, height-70);
+		noStroke();
+
   		timeButton.display();
   		geoButton.display();
   		minusButton.display();
