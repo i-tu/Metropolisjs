@@ -27,13 +27,26 @@ class Sidebar {
 
 	void display() {
 
-		rectMode(CORNERS);
+		rectMode(CENTER);
+		textAlign(RIGHT, CENTER);
 		textFont(titleFont);
 		fill(0);
 
-		text(places[origo].name, width/2,height-35);
+		text(places[origo].name, width/2, height-38);
+
+		if(trackMode == 1) {
+			for(int i = 0; i < places[origo].tracks.size(); i++) {
+				fill(0,0,0,30);
+				rect(40, 50 + i*60, 120, 50);
+				fill((Integer) places[origo].colors.get(i));
+				ellipse(100, 50 + i*60, 50, 50);
+				fill(0);
+				text((String) places[origo].tracks.get(i), 50, 50 + i*60);
+			}
+		}
 
 		fill(0,0,0,30);
+		rectMode(CORNERS);
 		rect(0, height, width, height-70);
   		
   		timeButton.display();
@@ -41,7 +54,8 @@ class Sidebar {
   		minusButton.display();
   		plusButton.display();
   		trackButton.display();
-
+  		fill(0);
+//  		text(int(frameRate),20,60);
 	}
 
 	void mousePress() {
@@ -52,8 +66,7 @@ class Sidebar {
 	    mode = 1;
 	    switch_origo(origo); // Essentially, refresh.
 	  }
-	  else if(geoButton.inside() && !geoButton.isToggled())
-	  {
+	  else if(geoButton.inside() && !geoButton.isToggled()) {
 	    timeButton.toggle();
 	    geoButton.toggle();
 	    mode = 0;
@@ -66,21 +79,16 @@ class Sidebar {
 	    	trackMode = 0;
 	   	else
 	   		trackMode = 1;
-	   }
-	  else if(plusButton.inside())
-	  {
+	  }
+	  else if(plusButton.inside()) {
 	    zoomAmount *= 1.5;
 	    if(zoomAmount > 5)
 	      zoomAmount = 5;
 	  }
-	  else if(minusButton.inside())
-	  {
+	  else if(minusButton.inside()) {
 	    zoomAmount /= 1.5;
 	    if(zoomAmount < 0.5)
 	      zoomAmount = 0.5;
 	  }
-
-
 	}
-
 }

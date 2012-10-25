@@ -140,7 +140,6 @@ class Place
   {
     rectMode(CENTER);
     stroke(0);
-    fill(255);
 
     if (tracks.size() == 0)
       return;
@@ -154,7 +153,16 @@ class Place
     pushMatrix();
       translate(zoomX(x_actual), zoomY(y_actual));
 
-      if(trackMode == 1){
+      if(this.inside()) {
+        fill(120);
+        rect(50,0,50,10);
+        text(name,20,0);
+      }
+      else {
+        fill(255);
+      }
+
+      if(trackMode == 1) {
         rotate(dir);
         drawStop(0,0, 2 + (tracks.size()-1)*8, n<=68 ? 8 : 5);
       }
@@ -162,9 +170,6 @@ class Place
         ellipse(0,0,10,10);
       }
 
-      if(this.inside())
-        text(name,0,0);
-        
     popMatrix();
     
   }

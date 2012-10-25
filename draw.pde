@@ -5,10 +5,6 @@ void draw()
   textAlign(CENTER, CENTER);
   textFont(labelFont);
   
-  fill(0);
-  text(int(frameRate),20,60);
-
-
   colorMode(HSB, 100);
 
   for(int i = 3600; i > 0; i -= 600) {
@@ -85,7 +81,6 @@ void drawScale(float d, color c) {
 
 
 void drawStop(float x, float y, float w, float h) {
-  fill(255);
   x -= w/2;
   y -= h/2;
 

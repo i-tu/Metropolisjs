@@ -3,7 +3,6 @@ Track[] railTracks;
 Track[] tramTracks;
 int[][] distanceMatrix;
 
-
 Sidebar sidebar;
 
 float zoomAmount = 1;
@@ -31,7 +30,7 @@ PFont scaleFont;
 
 void setup() {
 
-  size(1000, 1000);
+  size(1000, 800);
   
   String[] railStops = loadStrings("data/stops_rail.txt");
   String[] tramStops = loadStrings("data/stops_tram.txt");
