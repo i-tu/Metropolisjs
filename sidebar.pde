@@ -35,13 +35,21 @@ class Sidebar {
 		text(places[origo].name, width/2, height-38);
 
 		if(trackMode == 1) {
+			String last = "";
+			int skipped = 0;
 			for(int i = 0; i < places[origo].tracks.size(); i++) {
+				if(last.equals((String) places[origo].tracks.get(i))){
+					skipped++;
+					continue;
+				}
+
 				fill(0,0,0,30);
-				rect(40, 50 + i*60, 120, 50);
+				rect(40, 50 + (i-skipped)*60, 120, 50);
 				fill((Integer) places[origo].colors.get(i));
-				ellipse(100, 50 + i*60, 50, 50);
+				ellipse(100, 50 + (i-skipped)*60, 50, 50);
 				fill(0);
-				text((String) places[origo].tracks.get(i), 50, 50 + i*60);
+				text((String) places[origo].tracks.get(i), 50, 50 + (i-skipped)*60);
+				last = (String) places[origo].tracks.get(i);
 			}
 		}
 
