@@ -15,6 +15,8 @@ class Place
   float x_actual;
   float y_actual;
   
+  float dir;
+
   float x_ref;
   float y_ref;
   float angle_ref;
@@ -39,13 +41,17 @@ class Place
   void print() {
     println(
     "I am " + getName() + " at coords (" + str(getX()) + ", " + str(getY()) + "). "+ '\n' +
-    "Screen coordinates: (" + str(x_actual) + ", " + str(y_actual) + "). angle: " + str(angle_ref) + '\n');
+    "Screen coordinates: (" + str(x_actual) + ", " + str(y_actual) + "). angle: " + str(angle_ref) + '\n' +
+    "My ID is: " + str(n) + '\n'
+    );
     return;
   }
   
   String getName () { return name; }
   int getX() { return x; }
   int getY() { return y; }
+  float getAX() { return x_actual; }
+  float getAY() { return y_actual; }
   
   boolean inside() {
     if(dist(zoomX(x_actual),zoomY(y_actual),mouseX,mouseY)<15) return true;
@@ -97,6 +103,11 @@ class Place
     a_y = 4 * (y_ref - y_actual ) / ((fr*TIME_CONSTANT)*(fr*TIME_CONSTANT));
     v_x=0;
     v_y=0;
+    dir = 0;
+
+    for(int i = 0; i<tracks.size(); i++)
+      dir += trackDirection(n, (String)tracks.get(i));
+    dir = dir/tracks.size();
   }
   
   float timeToOrigo() // s -> h
@@ -112,22 +123,12 @@ class Place
   
   float stopCoordsX(String ID)
   {
-    return zoomX(x_actual) + cos(trackDirection(n, ID))*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 10;
+    return zoomX(x_actual) + cos(dir)*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 10;
   }
   
   float stopCoordsY(String ID)
   {
-    return zoomY(y_actual) + sin(trackDirection(n, ID))*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 10;
-  }
-  
-  float tramStopCoordsX(String ID)
-  {
-    return zoomX(x_actual) + cos(trackDirection(n, ID))*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 8;
-  }
-  
-  float tramStopCoordsY(String ID)
-  {
-    return zoomY(y_actual) + sin(trackDirection(n, ID))*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 8;
+    return zoomY(y_actual) + sin(dir)*(((float)tracks.indexOf(ID)+1)-((float)tracks.size()+1)/2) * 10;
   }
   
   void consolidate(){
@@ -143,34 +144,31 @@ class Place
     if (tracks.size() == 0)
       return;
 
-    float dir = 0;
     boolean onLine = false;
 
-    for(int i = 0; i<tracks.size(); i++)
-      dir += trackDirection(n, (String)tracks.get(i));
-    dir = dir/tracks.size();
-      
-    pushMatrix();
-      translate(zoomX(x_actual), zoomY(y_actual));
-      fill(0,0,100);
+    for(int i = 0; i < tracks.size(); i++) {
+      pushMatrix();
+        translate(zoomX(x_actual), zoomY(y_actual));
+        rotate(dir);
+        fill((Integer) colors.get(i));
+        ellipse( (i+1-((float)tracks.size()+1)/2) * 10, 0, 10, 10);
+        fill(0,0,255);
+        ellipse( (i+1-((float)tracks.size()+1)/2) * 10, 0, 6, 6);
+      popMatrix();
+    }
 
-      if(trackMode == 1) {
-        float stopH;
-        if(n <= 68)
-          stopH = 5;
-        else
-          stopH = 5;
- 
-        if(n != 0)
-          rotate(dir);
-
-        drawStop(0, 0, 2 + (tracks.size()-1)*9, stopH);
-        textAlign(LEFT, CENTER);
         fill(0,0,0);
-        text(name, 5 + tracks.size()*9, 0);
-      }
+        noStroke();
+  }
 
-    popMatrix();
+  void displayText()  {
+      pushMatrix();
+      translate(zoomX(x_actual), zoomY(y_actual));
+      fill(0,0,0);
+      textAlign(LEFT, CENTER);
+      textFont(labelFont);
+      text(name, 3 + tracks.size()*9, 0);
+      popMatrix();
   }
 
   float trackDirection(int placeID, String trackID) {

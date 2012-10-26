@@ -56,75 +56,60 @@ class Track
         break;
       }
     }
-
     if(!origoOnLine && !mouseOnLine) {
       return;
     }
-
     curveTightness(0.85);
     noFill();
 
     int i;
-    if(type == 0)
-    {
-      strokeWeight(6);
+     
 
-      if(origoOnLine)
-        stroke(c, 230);
-      else
-        stroke(c, 50);
-        
+stroke(0,0,255);
+
+    strokeWeight(8);
       beginShape();
         curveVertex(places[stops[0]].stopCoordsX(label), places[stops[0]].stopCoordsY(label) );
         for (i = 0; i < stops.length; i++)
           curveVertex(places[stops[i]].stopCoordsX(label), places[stops[i]].stopCoordsY(label) );
         curveVertex(places[stops[i-1]].stopCoordsX(label), places[stops[i-1]].stopCoordsY(label) );
       endShape();
-    } 
-    else if (type == 1)
-    {
-      strokeWeight(6);
 
-      if(origoOnLine)
-        stroke(c, 230);
-      else 
-        stroke(c, 50);
+    if(origoOnLine)
+      stroke(c, 230);
+    else 
+      stroke(c, 50);
 
+    strokeWeight(6);
       beginShape();
-        curveVertex(places[stops[0]].tramStopCoordsX(label), places[stops[0]].tramStopCoordsY(label) );
-        for (i = 0; i < stops.length; i++) 
-          curveVertex(places[stops[i]].tramStopCoordsX(label), places[stops[i]].tramStopCoordsY(label) );
-        curveVertex(places[stops[i-1]].tramStopCoordsX(label), places[stops[i-1]].tramStopCoordsY(label) );
+        curveVertex(places[stops[0]].stopCoordsX(label), places[stops[0]].stopCoordsY(label) );
+        for (i = 0; i < stops.length; i++)
+          curveVertex(places[stops[i]].stopCoordsX(label), places[stops[i]].stopCoordsY(label) );
+        curveVertex(places[stops[i-1]].stopCoordsX(label), places[stops[i-1]].stopCoordsY(label) );
       endShape();
-    }
   
   strokeWeight(1);
   }
 
   // Returns direction of track through given place
   float trackDirection(int placeID) {
-
     int i;
     for(i = 0;i<stops.length-1;i++) {
       if(stops[i] == placeID)
         break;
     }    
-    if(i==0) {
+    if(i == 0) {
       return atan((places[stops[0]].getX() - places[stops[1]].getX())/
                   (places[stops[0]].getY() - places[stops[1]].getY()));
     }
     else if(i == stops.length -1) {
       return atan((places[stops[stops.length-2]].getX() - places[stops[stops.length-1]].getX()) /
-                  (places[stops[stops.length-2]].getY() - places[stops[stops.length-1]].getY() + 0.1) );
+                  (places[stops[stops.length-2]].getY() - places[stops[stops.length-1]].getY()) );
     }
     else {
-      return (
-             atan( (places[stops[i]].getX() - places[stops[i+1]].getX()) /
-                   (places[stops[i]].getY() - places[stops[i+1]].getY()) )
-             +
-             atan( (places[stops[i]].getX() - places[stops[i-1]].getX()) /
-                   (places[stops[i]].getY() - places[stops[i-1]].getY()) )
-             ) / 2;
+      return
+             atan( (places[stops[i-1]].getX() - places[stops[i+1]].getX()) /
+                   (places[stops[i-1]].getY() - places[stops[i+1]].getY() + 0.00001) );
     }
   }
 

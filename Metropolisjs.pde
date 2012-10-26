@@ -6,7 +6,6 @@ int[][] distanceMatrix;
 Sidebar sidebar;
 
 float zoomAmount = 1;
-
 int origo = 1;
 boolean origo_more;
 
@@ -46,8 +45,6 @@ void setup() {
     places[i] = new Place(pieces[0], int(pieces[1]), int( pieces[2]), i, 0);
   }
   
-
-  
   distanceMatrix = new int[n_places][n_places];
   
   for(int i = 0; i < n_places; i++) {
@@ -60,8 +57,6 @@ void setup() {
         distanceMatrix[i][j] = distanceMatrix[j][i] = int(pieces[j]);
     }
   }
-      
-
   
   railTracks = new Track[railTrackData.length];
    
@@ -94,6 +89,7 @@ void setup() {
   for (int i = 0; i < places.length; i++)
     places[i].calculate_location();
   places[origo].calculate_location();
+  places[origo].consolidate();
     
   labelFont = createFont("Helvetica", 12);
   lineFont = createFont("Arial Rounded MT Bold", 58);
@@ -103,7 +99,7 @@ void setup() {
   textFont(labelFont);
 
   sidebar = new Sidebar();
-
+  
   frameRate(fr);
   smooth();
 }
@@ -132,6 +128,7 @@ void mousePressed() {
   for (int i = 0; i < places.length; i++) {
     if(places[i].inside()) {
       switch_origo(i);
+      places[i].print();
       break;
     }
   }

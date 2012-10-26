@@ -1,11 +1,16 @@
-void draw()
-{  
+void draw() {  
   textAlign(CENTER, CENTER);
   textFont(labelFont);
 
-  for(int i = 3600; i > 0; i -= 600) {
-    drawScale(i, color(0, 0, i*10));
-  }
+  background(0,0,255);
+
+  drawScale(2400, color(0,0,80));
+  drawScale(1800,  color(0,0,80));
+  drawScale(1200, color(0,0,80));
+  drawScale(600,  color(0,0,80));
+
+  for (int i = 0; i < places.length; i++)
+      places[i].displayText();
 
   if(trackMode == 1) {
     for (int i = 0; i < railTracks.length; i++)  
@@ -18,9 +23,7 @@ void draw()
   textFont(labelFont);
   
   for (int i = 0; i < places.length; i++)
-    if(i != origo)
       places[i].display();
-  places[origo].display();
 
   if(movedFrames >= 0) { // Asking if counter started
     for (int i = 0; i < places.length; i++) {
@@ -43,10 +46,11 @@ void draw()
 void drawScale(float d, color c) {
 
   textAlign(CENTER, CENTER);
-  
+  fill(0,0,0,0);
+  stroke(c);
+
   if (mode == 0) { 
-    float scaled = (d) * zoomAmount;
-    fill(c);
+    float scaled = d * zoomAmount;
     ellipse(width/2, height/2, scaled, scaled);
 
     if(d > 2000)
@@ -59,8 +63,6 @@ void drawScale(float d, color c) {
    else if(mode == 1) {
     float scaled = d * (0.6667) * zoomAmount;
 
-    stroke(c);
-    fill(c);
     textFont(scaleFont);
 
     ellipse(width/2, height/2, scaled, scaled);
@@ -74,7 +76,7 @@ void drawStop(float x, float y, float w, float h) {
   y -= h/2;
   w += 7;
 
-noStroke();
+  stroke(0,0,0);
 
   beginShape();
     vertex(-w/2, -h/2);
@@ -83,11 +85,12 @@ noStroke();
     vertex(-w/2,-h/2+h);
     bezierVertex(-w/2-h, -h/2+h, -w/2-h, -h/2, -w/2, -h/2);
   endShape();
+
+  noStroke();
 }
 
 
-float globeScale(float x)
-{
+float globeScale(float x) {
   float D = 10000; // We are watching the globe from 10km away
   float R = 5000; // The globe has a radius of 50000 km
 
