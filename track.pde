@@ -59,7 +59,7 @@ class Track
     if(!origoOnLine && !mouseOnLine) {
       return;
     }
-    curveTightness(0.85);
+    curveTightness(0.6);
     noFill();
 
     int i;

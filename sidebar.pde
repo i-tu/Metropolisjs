@@ -30,10 +30,7 @@ class Sidebar {
 		rectMode(CENTER);
 		fill(0);
 
-
 		if(trackMode == 1) {
-			text(places[origo].name, 50, 50);
-			text("yhteydet", 50, 75);
 			String last = "";
 			int skipped = 0;
 			for(int i = 0; i < places[origo].tracks.size(); i++) {
@@ -70,8 +67,11 @@ class Sidebar {
   		fill(0);
 
     textFont(titleFont);
-    textAlign(LEFT,CENTER);
-    text(places[origo].name, width/2, height-38);
+    textAlign(CENTER,CENTER);
+    if(mode==1)
+      text("Temporaalinen raideliikennekartta: " + places[origo].name, width/2+50, height-38);
+    else text("Spatiaalinen raideliikennekartta: " + places[origo].name, width/2+50, height-38);
+    
 	}
 
 	void mousePress() {
