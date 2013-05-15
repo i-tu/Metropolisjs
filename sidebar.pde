@@ -30,9 +30,6 @@ class Sidebar {
 		rectMode(CENTER);
 		fill(0);
 
-		textFont(titleFont);
-		textAlign(LEFT,CENTER);
-		text(places[origo].name, width/2, height-38);
 
 		if(trackMode == 1) {
 			text(places[origo].name, 50, 50);
@@ -71,7 +68,10 @@ class Sidebar {
   		plusButton.display();
   		trackButton.display();
   		fill(0);
-//  		text(int(frameRate),20,60);
+
+    textFont(titleFont);
+    textAlign(LEFT,CENTER);
+    text(places[origo].name, width/2, height-38);
 	}
 
 	void mousePress() {

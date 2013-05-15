@@ -7,7 +7,7 @@ class Button
   int buttonHeight;
   boolean toggled;
   color currentcolor = color(255,255,255,0);
-  color highlightcolor = color(0,70);
+  color highlightcolor = color(0,70,50);
   color basecolor = color(255,255,255,0);
   
   Button(int x_, int y_, int w_, int h_, PShape sh_, boolean toggled_) {
@@ -38,12 +38,10 @@ class Button
   
   void display() {
 
-    if(toggled)
-      fill(highlightcolor);
-    else
-      fill(basecolor);
-
     fill(0);
+    if(toggled)
+      rect(x-16,y+25,x+14,y+27);
+
     shapeMode(CENTER);
     shape(sh, x, y, buttonWidth - 5, buttonHeight - 5);
   }

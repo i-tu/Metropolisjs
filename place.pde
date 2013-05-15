@@ -141,6 +141,16 @@ class Place
   {
     rectMode(CENTER);
 
+    if(trackMode==0){
+      pushMatrix();
+        translate(zoomX(x_actual), zoomY(y_actual));
+      fill(0,0,255);
+      ellipse(0,0,10,10);
+      
+      popMatrix();
+      return;
+    }
+
     if (tracks.size() == 0)
       return;
 

@@ -8,7 +8,8 @@ void draw() {
   drawScale(1800,  color(0,0,80));
   drawScale(1200, color(0,0,80));
   drawScale(600,  color(0,0,80));
-
+  drawScale(300,  color(0,0,80));
+  
   for (int i = 0; i < places.length; i++)
       places[i].displayText();
 
@@ -46,17 +47,11 @@ void draw() {
 void drawScale(float d, color c) {
 
   textAlign(CENTER, CENTER);
-  fill(0,0,0,0);
+  fill(0,0,0,5);
   stroke(c);
 
   if (mode == 0) { 
-    float scaled = d * zoomAmount;
-    ellipse(width/2, height/2, scaled, scaled);
-
-    if(d > 2000)
-      text(str(round(d/1000)) + " km", width/2, height/2 - scaled/2);
-    else
-      text(str(round(d)) + " m", width/2, height/2 - scaled/2);
+return;
 
    }
 
@@ -66,8 +61,10 @@ void drawScale(float d, color c) {
     textFont(scaleFont);
 
     ellipse(width/2, height/2, scaled, scaled);
-    text(str(round(d/60)), width/2, height/2 - scaled/2 - 15);
+    fill(0,0,0,50);
+    text(str(round(d/60)) + "min.", width/2, height/2 - scaled/2 +50);
   }
+  fill(0,0,0,0);
 }
 
 
