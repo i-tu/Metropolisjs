@@ -9,6 +9,6 @@ See how this affects your feel of the city.
 
 Tools used:
 
--Data including travel times and locations mined and normalized from Reittiopas API using Python (over 100k values fetched)
--App coded in Java using Processing.org libraries, all functionality in as little as 700 lines of code.
--Converted to Javascript on the fly for your browser using processing.js
+* Travel times and locations mined and normalized from Reittiopas API with custom Python script (over 100k values fetched)
+* App coded in Java using Processing.org
+* Converted to Javascript on the fly with processing.js
