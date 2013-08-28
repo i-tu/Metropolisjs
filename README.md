@@ -1,11 +1,9 @@
-Metropolis
-=====
+Demo: http://users.tkk.fi/~ituomi/Raideliikennekartta/
 
-This application was the result of contemplation on Harry Beck's famous map and similar new mapping conventions which could emerge in society.
+This app was the result of contemplation on Harry Beck's famous map and similar new mapping conventions which could emerge in society.
+The tram and metro lines of Helsinki are displayed.
 Distance from the center of map is determined by travel time instead of geographical coordinates.
-Tram and metro lines are displayed.
 Temporal information can be exchanged for geographical and viewing the tracks can be turned off.
-See how this affects your feel of the city.
 
 Tools used:
 
