@@ -1,4 +1,4 @@
-Metropolis - Helsinki interactive travel map
+Helsinki interactive travel map
 ============================================
 
 Demo: http://users.tkk.fi/~ituomi/Raideliikennekartta/
