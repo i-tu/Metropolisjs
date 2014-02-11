@@ -62,33 +62,30 @@ class Track
     curveTightness(0.6);
     noFill();
 
-    int i;
-     
-
 stroke(0,0,255);
 
-    strokeWeight(8);
-      beginShape();
-        curveVertex(places[stops[0]].stopCoordsX(label), places[stops[0]].stopCoordsY(label) );
-        for (i = 0; i < stops.length; i++)
-          curveVertex(places[stops[i]].stopCoordsX(label), places[stops[i]].stopCoordsY(label) );
-        curveVertex(places[stops[i-1]].stopCoordsX(label), places[stops[i-1]].stopCoordsY(label) );
-      endShape();
+  drawCurve(8);
 
     if(origoOnLine)
       stroke(c, 230);
     else 
       stroke(c, 50);
+  
+  drawCurve(6);
 
-    strokeWeight(6);
+  strokeWeight(1);
+  }
+
+  void drawCurve(int weight)
+  {
+    strokeWeight(weight);
       beginShape();
         curveVertex(places[stops[0]].stopCoordsX(label), places[stops[0]].stopCoordsY(label) );
+        int i;
         for (i = 0; i < stops.length; i++)
           curveVertex(places[stops[i]].stopCoordsX(label), places[stops[i]].stopCoordsY(label) );
         curveVertex(places[stops[i-1]].stopCoordsX(label), places[stops[i-1]].stopCoordsY(label) );
       endShape();
-  
-  strokeWeight(1);
   }
 
   // Returns direction of track through given place
