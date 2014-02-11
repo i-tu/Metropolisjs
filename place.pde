@@ -192,14 +192,5 @@ class Place
 
     return 0;
   }
-
-  float circleBin(float ang, int n) {
-    ang+=PI;
-    
-    for(int i = 1; i <= n; i++)
-      if(ang < 2 * PI * (i/n))
-        return 2 * PI * (i/n - 1);
-    return 1;
-  }
   
 }
