@@ -7,13 +7,12 @@ Sidebar sidebar;
 
 float zoomAmount = 1;
 int origo = 1;
-boolean origo_more;
 
 float TIME_CONSTANT = 0.5;
-float fr          = 24;
+float fr = 24;
 
-int movedFrames   = -1;
-int mode = 1;
+int movedFrames = -1;
+int dynamicMode = 1;
 int trackMode = 1;
 
 PFont labelFont;
@@ -26,11 +25,11 @@ void setup() {
   size(1000, 800);
   colorMode(HSB, 360, 100, 100);
 
-  String[] railStops = loadStrings("data/stops_rail.txt");
-  String[] tramStops = loadStrings("data/stops_tram.txt");
+  String[] railStops     = loadStrings("data/stops_rail.txt");
+  String[] tramStops     = loadStrings("data/stops_tram.txt");
   String[] railTrackData = loadStrings("data/lines_rail.txt");
   String[] tramTrackData = loadStrings("data/lines_tram.txt");
-  String[] distMatrix = loadStrings("data/distance_matrix.txt");
+  String[] distMatrix    = loadStrings("data/distance_matrix.txt");
 
   int n_places = distMatrix.length;
 
@@ -88,6 +87,7 @@ void setup() {
 
   for (int i = 0; i < places.length; i++)
     places[i].calculate_location();
+    
   places[origo].calculate_location();
   places[origo].consolidate();
     

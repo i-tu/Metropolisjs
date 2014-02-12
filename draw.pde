@@ -50,12 +50,10 @@ void drawScale(float d, color c) {
   fill(0,0,0,5);
   stroke(c);
 
-  if (mode == 0) { 
-return;
-
-   }
-
-   else if(mode == 1) {
+  if (dynamicMode == 0) { 
+    return;
+  }
+  else if(dynamicMode == 1) {
     float scaled = d * (0.6667) * zoomAmount;
 
     textFont(scaleFont);
@@ -64,6 +62,7 @@ return;
     fill(0,0,0,50);
     text(str(round(d/60)) + "min.", width/2, height/2 - scaled/2 +50);
   }
+
   fill(0,0,0,0);
 }
 

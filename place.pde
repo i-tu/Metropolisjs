@@ -84,11 +84,11 @@ class Place
       
       float radius = sqrt(x_ref*x_ref+y_ref*y_ref);
 
-      if(mode == 0) {
+      if(dynamicMode == 0) {
         x_ref = width/2  - cos(angle_ref) * radius / 20;
         y_ref = height/2 + sin(angle_ref) * radius / 20;
       }
-      else if (mode==1)
+      else if (dynamicMode == 1)
       {
         x_ref = width/2  - cos(angle_ref) * distanceMatrix[n][origo] / 3;
         y_ref = height/2 + sin(angle_ref) * distanceMatrix[n][origo] / 3;
@@ -136,23 +136,12 @@ class Place
     y_actual = y_ref;
   }
   
-  // Display point in relation to selected origo.
-  void display()
-  {
-    rectMode(CENTER);
+  void displayTrackless(){
+    fill(0,0,255);
+    ellipse(zoomX(x_actual), zoomY(y_actual),10,10);  
+  }
 
-    if(trackMode==0){
-      pushMatrix();
-        translate(zoomX(x_actual), zoomY(y_actual));
-      fill(0,0,255);
-      ellipse(0,0,10,10);
-      
-      popMatrix();
-      return;
-    }
-
-    if (tracks.size() == 0)
-      return;
+  void displayTrackful(){
 
     boolean onLine = false;
 
@@ -169,6 +158,19 @@ class Place
 
         fill(0,0,0);
         noStroke();
+  }
+
+  // Display point in relation to selected origo.
+  void display()
+  {
+    rectMode(CENTER);
+
+    if(trackMode == 0)
+      displayTrackless();
+    else if (tracks.size() == 0)
+      return;
+    else
+      displayTrackful();
   }
 
   void displayText()  {

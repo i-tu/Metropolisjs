@@ -68,7 +68,7 @@ class Sidebar {
 
     textFont(titleFont);
     textAlign(CENTER,CENTER);
-    if(mode==1)
+    if(dynamicMode == 1)
       text("Temporaalinen raideliikennekartta: " + places[origo].name, width/2+50, height-38);
     else text("Spatiaalinen raideliikennekartta: " + places[origo].name, width/2+50, height-38);
     
@@ -79,13 +79,13 @@ class Sidebar {
 	  if(timeButton.inside() && !timeButton.isToggled()) {
 	    timeButton.toggle();
 	    geoButton.toggle();
-	    mode = 1;
+	    dynamicMode = 1;
 	    switch_origo(origo); // Essentially, refresh.
 	  }
 	  else if(geoButton.inside() && !geoButton.isToggled()) {
 	    timeButton.toggle();
 	    geoButton.toggle();
-	    mode = 0;
+	    dynamicMode = 0;
 	    switch_origo(origo);
 	  }
 	  if(trackButton.inside()) {
