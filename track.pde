@@ -59,17 +59,18 @@ class Track
     if(!origoOnLine && !mouseOnLine) {
       return;
     }
+
     curveTightness(0.6);
     noFill();
 
-    stroke(0,0,255);
+    stroke(0, 0, 255);
 
     drawCurve(8);
 
-      if(origoOnLine)
-        stroke(c, 230);
-      else 
-        stroke(c, 50);
+    if(origoOnLine)
+      stroke(c, 230);
+    else 
+      stroke(c, 50);
     
     drawCurve(6);
 
@@ -84,6 +85,7 @@ class Track
         int i;
         for (i = 0; i < stops.length; i++)
           curveVertex(places[stops[i]].stopCoordsX(label), places[stops[i]].stopCoordsY(label) );
+          
         curveVertex(places[stops[i-1]].stopCoordsX(label), places[stops[i-1]].stopCoordsY(label) );
       endShape();
   }

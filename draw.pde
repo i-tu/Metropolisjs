@@ -5,13 +5,10 @@ void draw() {
   background(0,0,255);
 
   drawScale(2400, color(0,0,80));
-  drawScale(1800,  color(0,0,80));
+  drawScale(1800, color(0,0,80));
   drawScale(1200, color(0,0,80));
   drawScale(600,  color(0,0,80));
   drawScale(300,  color(0,0,80));
-
-//  for (int i = 0; i < places.length; i++)
-//      places[i].displayText();
 
   if(trackMode == 1) {
     for (int i = 0; i < railTracks.length; i++)  
@@ -23,8 +20,12 @@ void draw() {
 
   textFont(labelFont);
   
-  for (int i = 0; i < places.length; i++)
+  for (int i = 0; i < places.length; i++){
       places[i].display();
+      if(places[i].inside())
+        places[i].displayText();
+  }
+
 
   if(movedFrames >= 0) { // Asking if counter started
     for (int i = 0; i < places.length; i++) {
@@ -40,6 +41,8 @@ void draw() {
   
   sidebar.display();
   
+
+
   textFont(titleFont);
   textAlign(LEFT, CENTER);
 }
@@ -54,7 +57,7 @@ void drawScale(float d, color c) {
     return;
   }
   else if(dynamicMode == 1) {
-    float scaled = d * (0.6667) * zoomAmount;
+    float scaled = d /* (0.6667) */ * zoomAmount;
 
     textFont(scaleFont);
 

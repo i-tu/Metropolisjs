@@ -109,7 +109,7 @@ class Place
       dir += trackDirection(n, (String)tracks.get(i));
     dir = dir/tracks.size();
   }
-  
+
   float timeToOrigo() // s -> h
   {
    return sqrt( (cos(angle_ref) * distanceMatrix[n][origo]) * (cos(angle_ref) * distanceMatrix[n][origo]) + 
@@ -142,7 +142,6 @@ class Place
   }
 
   void displayTrackful(){
-
     noStroke();
     boolean onLine = false;
 

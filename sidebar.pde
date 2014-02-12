@@ -41,11 +41,11 @@ class Sidebar {
 
 				fill(0,0,0,30);
 				fill((Integer) places[origo].colors.get(i));
-				ellipse(100, 150 + (i-skipped)*60, 50, 50);
+				ellipse(100+ (i-skipped)*60, height-100, 50, 50);
 				fill(0,0,100);
 				textFont(lineFont);
 				textAlign(CENTER, CENTER);
-				text((String) places[origo].tracks.get(i), 100, 142 + (i-skipped)*60);
+				text((String) places[origo].tracks.get(i), 100+ (i-skipped)*60, height-107);
 				last = (String) places[origo].tracks.get(i);
 				textFont(titleFont);
 			}
