@@ -9,9 +9,9 @@ void draw() {
   drawScale(1200, color(0,0,80));
   drawScale(600,  color(0,0,80));
   drawScale(300,  color(0,0,80));
-  
-  for (int i = 0; i < places.length; i++)
-      places[i].displayText();
+
+//  for (int i = 0; i < places.length; i++)
+//      places[i].displayText();
 
   if(trackMode == 1) {
     for (int i = 0; i < railTracks.length; i++)  
@@ -83,12 +83,4 @@ void drawStop(float x, float y, float w, float h) {
   endShape();
 
   noStroke();
-}
-
-
-float globeScale(float x) {
-  float D = 10000; // We are watching the globe from 10km away
-  float R = 5000; // The globe has a radius of 50000 km
-
-  return (sin(x/R)*R*D)/(D+R+cos(x/R)*R);
 }

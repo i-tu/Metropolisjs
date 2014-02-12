@@ -62,18 +62,18 @@ class Track
     curveTightness(0.6);
     noFill();
 
-stroke(0,0,255);
+    stroke(0,0,255);
 
-  drawCurve(8);
+    drawCurve(8);
 
-    if(origoOnLine)
-      stroke(c, 230);
-    else 
-      stroke(c, 50);
-  
-  drawCurve(6);
+      if(origoOnLine)
+        stroke(c, 230);
+      else 
+        stroke(c, 50);
+    
+    drawCurve(6);
 
-  strokeWeight(1);
+    strokeWeight(1);
   }
 
   void drawCurve(int weight)
