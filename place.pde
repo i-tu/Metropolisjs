@@ -143,6 +143,7 @@ class Place
 
   void displayTrackful(){
 
+    noStroke();
     boolean onLine = false;
 
     for(int i = 0; i < tracks.size(); i++) {
@@ -156,8 +157,7 @@ class Place
       popMatrix();
     }
 
-        fill(0,0,0);
-        noStroke();
+    fill(0,0,0);
   }
 
   // Display point in relation to selected origo.
